@@ -1,0 +1,31 @@
+{%- comment -%} Referencing an object, using the global collections objects. Specifying which collection using handle ['featured-collection'] {%- endcomment -%}
+{% assign collection = collections['featured-collection'] %}
+{{ collection }}
+{%- comment -%} Outputs CollectionDrop - The type of object and drop after it, just indicates that you are using a shopfiy object {%- endcomment -%}
+
+{%- comment -%} Example of referencing products {%- endcomment -%}
+{% assign product = all_products['wayfarer-shades'].title %}
+{{ product }}
+{%- comment -%} Outputs ProductDrop {%- endcomment -%}
+
+{%- comment -%} Other examples, there's more {%- endcomment -%}
+{% assign pages = pages['page-name'] %}
+{% assign blogs = blogs['blog-name'] %}
+
+{%- comment -%} all collection handle is the default for all products in the store {%- endcomment -%}
+{% assign collection = collections['all'] %}
+{{ collection.title }}
+<ul>
+  {% for product in collection.products %}
+    <li>
+      <a href="{{ product.url }}">{{ product.title }}
+        {%- comment -%} money filter converts it from 8000 (cents value) to $80.00 {%- endcomment -%}
+        {{ product.title}} - Price: {{ product.price | money }}
+      </a>
+      {%- comment -%} if product.availble != true then show sold out on item link {%- endcomment -%}
+      {% unless product.available %}
+        SOLD OUT!
+      {% endunless %}
+    </li>
+  {% endfor %}
+</ul>
