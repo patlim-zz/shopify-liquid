@@ -1,0 +1,31 @@
+{% comment %} curly and percentage is for code, double curly to output {% endcomment %}
+{% assign variable = "Hello" %}
+{{ variable }}
+
+{% comment %} Below outputs 5 {% endcomment %}
+{% assign variable = 5 %}
+{{ variable }}
+
+{% comment %} liquid not a programming language so you must use a plus FILTER {% endcomment %}
+{% assign variable = 5 | plus: 5 %} 
+{{ variable }}
+
+{% comment %} liquid not a programming language so you must use a plus FILTER {% endcomment %}
+{% assign variable = 5 %} 
+{{ variable | plus: 5 }}
+
+{% assign array_string = "1,2,3,4,5,6" %}
+{%- comment -%} Must use split filter and the delimiter character "," to split it up{%- endcomment -%}
+{% assign array = array_string | split: "," %}
+{{ array }}
+{%- comment -%} Outputs 123456 {%- endcomment -%}
+
+{% assign array_string = "Bob, Pat, Chris, Denise, Clinton" %}
+{% assign array = array_string | split: "," %}
+<ul>
+  {% for name in array %}
+  {% if name.size < 3 %}
+    <li>{{ name }}</li>
+  {% endif %}
+  {% endfor %}
+</ul>
